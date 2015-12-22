@@ -1,0 +1,71 @@
+git标签
+
+标签常常用在标记某个历史状态的关键点，一般用版本号例如v1.1或者日期1222等具有标志性的简单标记来记录。
+我们创建标签号的时候使用v1.2这种格式的，当我们写出一个Last Known Good （最后稳定的好版本） 版本的时候，我们会在这次的标签后加上后-lkg缀表示
+这个是lask known good版本，
+1.列出git中现有的标签
+git tag
+结果会显示所有标签
+
+2.查找特定序列的标签
+git tag -l v1.2.*
+结果会显示 v1.2.3 v1.2.4等等之类符合格式的标签
+
+3.创建标签
+git tag -a v1.1 -m 'version 1.1'
+-m是标签信息
+
+4.创建标签成功后可以查看信息
+git show v1.1
+
+5.创建轻量级标签
+git tag v1.2
+什么都不加，使用git show查看的时候不会显示那么多信息
+
+6.对之前某次提交贴个标签
+git tag -a v1.3 8d8ds3r
+后面跟上那次提交的校验和或者部分校验和即可。
+
+7.共享标签
+在push的时候默认不会将标签上传到远程服务器上，所以要
+git push --tags
+这样会将所有标签一并传到服务器上，别人在克隆或者同步git仓库的话，标签也会获取下来
+
+8.push指定标签
+git push v1.2
+
+9.查看指定标签的代码状态
+git checkout v1.2
+
+10.恢复代码到某个标签点
+在git show之后获取校验值，然后通过git reset回退代码
+
+11.删除标签
+git tag -d 制定标签
+
+其他git tag参数
+Git tag参数：
+用法：git tag [-a|-s|-u <key-id>] [-f] [-m <说明>|-F <文件>] <标签名> [<头>]
+或：git tag -d <标签名>...
+或：git tag -l [-n[<num>]] [--contains <提交>] [--points-at <对象>] 
+[<模式>...]
+或：git tag -v <标签名>...
+-l, --list 列出tag名称
+-n[<n>] 每个 tag 信息打印 <n> 行
+-d, --delete 删除 tags
+-v, --verify 验证 tags
+Tag 创建选项
+-a, --annotate 注解 tag，需要一个说明
+-m, --message <说明> tag 说明
+-F, --file <文件> 从文件中读取提交说明
+-s, --sign 注解并 GPG 签名的 tag
+--cleanup <模式> 设置如何删除提交说明里的空格和#注释
+-u, --local-user <key id>
+使用另外的私钥签名 tag
+-f, --force 如果存在，替换现有的 tag
+--column[=<风格>] 以列的方式显示 tag
+Tag 列表选项
+--contains <提交> 只打印包含提交的tags
+
+--points-at <对象> 只打印tags对象
+
